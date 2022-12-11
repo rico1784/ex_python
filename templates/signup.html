@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+{%include "model/head.html"%}
+
+<body>
+<div class="w-50 mt-3 m-auto">
+    <form action="/signup" method="post">
+        <h1 class="h3 mb-3 fw-normal">Créer votre compte</h1>
+        <div class="form-floating">
+            <input type="email" class="form-control" name="addEmail" id="addEmail" placeholder="name@example.com">
+            <label for="addEmail">Email address</label>
+        </div>
+        <div class="mb-3 form-floating">
+            <input type="password" class="form-control" name="addPassword" id="addPassword" placeholder="Password">
+            <label for="addPassword">Password</label>
+        </div>
+        <div class="mb-3 form-floating">
+            <input type="password" class="form-control" name="addCheckPassword" id="addCheckPassword" placeholder="Password">
+            <label for="addCheckPassword">Password</label>
+        </div>
+
+        <div>
+            {% if message %}
+            <p>
+                {{ message }}
+            </p>
+            {% endif %}
+        </div>
+        <button class="w-50  btn btn-lg btn-primary" type="submit">Sign in</button>
+    </form>
+</div>
+
+</body>
+{% include "model/script.html"%}
+{% include "model/footer.html"%}
+
+</html>
