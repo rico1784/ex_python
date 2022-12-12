@@ -20,47 +20,15 @@ def routeAccueil():
 
 @app.route('/login', methods=['POST', 'GET'])
 def routeLogin():
-    db = connector.connect(
-        user = 'root',
-        password = '',
-        database = 'users',
-        host = 'localhost'
-    )
-    ma_bdd = db.cursor()
     if request.method == 'POST':
-
-        query=("SELECT * from user WHERE email = %s")
         postemail = request.form['postEmail']
         password = request.form['postPassword']
-        ma_bdd.execute(query, postemail)
-        user = ma_bdd.fetchall()
-        message = user
+        mail = [postemail,password]
+        checkmail= users.processUser.checkUser(mail)
+        message = checkmail
         return render_template('login.html', message=message)
 
-
     return render_template('login.html')
-
-
-    #
-    # addr_mail = "example@example.fr"
-    # addr_pass = "example"
-    # if request.method == "POST":
-    #     message = ''
-    #     post_mail = request.form['postEmail']
-    #     post_pass = request.form['postPassword']
-    #     if addr_mail == post_mail and addr_pass == post_pass:
-    #         message = 'Connexion réussie.'
-    #
-    #     elif addr_mail == post_mail:
-    #         message = 'Mot de passe incorrect'
-    #     else:
-    #         message = 'user et password faux'
-    #     return render_template('login.html', message=message)
-    #
-    #
-    #
-    #
-
 
 
 
@@ -77,9 +45,9 @@ def routeSignup():
             if add_user:
                 message = 'Votre compte a été créer'
                 return render_template('signup.html', message=message)
-            else:
-                message = 'Les mots de passe me correspondent pas'
-                return render_template('signup.html', message=message)
+        elif password != addCheckPassword:
+            message = 'Les mots de passe me correspondent pas'
+            return render_template('signup.html', message=message)
 
 
     return render_template('signup.html')
