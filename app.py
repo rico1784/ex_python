@@ -2,6 +2,8 @@ from flask import Flask, render_template
 from flask import request
 from mysql import connector
 import os
+from Model import users
+
 app = Flask(__name__)
 # Gestion des images:
 IMG_FOLDER = os.path.join('static', 'img')
@@ -64,32 +66,20 @@ def routeLogin():
 
 @app.route('/signup', methods=['POST', 'GET'])
 def routeSignup():
-    db = connector.connect(
-        user = 'root',
-        password = '',
-        database = 'users',
-        host = 'localhost'
-    )
-    ma_bdd = db.cursor()
-
     if request.method == "POST":
-
         message = ''
         addEmail = request.form['addEmail']
         password = request.form['addPassword']
         addCheckPassword = request.form['addCheckPassword']
 
         if password == addCheckPassword:
-            req_add = "INSERT INTO user (email, password) VALUES (%s, %s)"
-            data = (addEmail, password)
-            ma_bdd.execute(req_add, data)
-            db.commit()
-            ma_bdd.close()
-            message = 'Votre compte a été créer'
-            return render_template('signup.html', message=message)
-        else:
-            message = 'Les mots de passe me correspondent pas'
-            return render_template('signup.html', message=message)
+            add_user = users.processUser.insertUser(addEmail, password)
+            if add_user:
+                message = 'Votre compte a été créer'
+                return render_template('signup.html', message=message)
+            else:
+                message = 'Les mots de passe me correspondent pas'
+                return render_template('signup.html', message=message)
 
 
     return render_template('signup.html')
