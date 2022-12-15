@@ -1,9 +1,8 @@
 import mysql.connector as connector
 
 class processUser:
-    def __init__(self, email):
-        self.email = email
-        self.is_ok = False
+    def __init__(self):
+        self.isOk = False
 
     def insertUser(email,password):
         db= connector.connect(
@@ -21,14 +20,14 @@ class processUser:
         db.close()
         return True
 
-    def checkUser(email):
+    def checkUser(emailckeck):
         db= connector.connect(
             user='root',
             password='',
             host='localhost',
             database='users')
         ma_bdd = db.cursor()
-        data = (email[0])
+        data = (emailckeck[0])
         request = '''(SELECT * FROM user WHERE email='%s')'''%data
         ma_bdd.execute(request)
         user = ma_bdd.fetchall()
@@ -36,6 +35,5 @@ class processUser:
         return user
 
 
-    def logOK(self, nouvel_etat):
-        self.is_ok = nouvel_etat
-        return self.is_ok
+    def logOK(self):
+        self.isOk = True

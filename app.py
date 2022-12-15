@@ -24,7 +24,7 @@ def routeLogin():
         postemail = request.form['postEmail']
         password = request.form['postPassword']
         mail = [postemail,password]
-        user = users.processUser
+
         if not postemail:
             return render_template('login.html', message='merci de compléter le formulaire')
 
@@ -32,11 +32,10 @@ def routeLogin():
             return render_template('login.html', message='manque le mot de passe')
         else:
             try:
-                checkmail= user.checkUser(mail)
+                checkmail= users.processUser.checkUser(mail)
                 passuser = checkmail[0][2]
                 if passuser == password:
                     return render_template('login.html', message='login OK')
-
                 elif passuser != password:
                     return render_template('login.html', message='Connexion échouée')
             except:
