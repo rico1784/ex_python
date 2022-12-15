@@ -1,9 +1,9 @@
 import mysql.connector as connector
 
 class processUser:
-    def __init__(self,email):
+    def __init__(self, email):
         self.email = email
-        self.isOk = False
+        self.is_ok = False
 
     def insertUser(email,password):
         db= connector.connect(
@@ -36,5 +36,6 @@ class processUser:
         return user
 
 
-    def logOK(self):
-        self.isOk = True
+    def logOK(self, nouvel_etat):
+        self.is_ok = nouvel_etat
+        return self.is_ok
