@@ -1,10 +1,9 @@
 import mysql.connector as connector
 
 class processUser:
-    def __init__(self, email, password):
+    def __init__(self,email):
         self.email = email
-        self.password = password
-        self.is_ok = False
+        self.isOk = False
 
     def insertUser(email,password):
         db= connector.connect(
@@ -35,3 +34,7 @@ class processUser:
         user = ma_bdd.fetchall()
         ma_bdd.close()
         return user
+
+
+    def logOK(self):
+        self.isOk = True
