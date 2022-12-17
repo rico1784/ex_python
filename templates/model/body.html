@@ -1,6 +1,15 @@
 <body>
-<div class="w-50 mt-3 m-auto">
+<div class="w-40 mt-4">
     <h1 class="text-center">Exercice code python</h1>
-    <img class="m-auto" src="{{ user_image }}" alt="Mike" height="350px">
+    <h2>
+        {% if user %}
+        <p class="text-center">
+            Bonjour {{ user }}
+        </p>
+        {% endif %}
+    </h2>
+    <img src="{{ user_image }}" alt="paysage forêt" width="100%" >
+
+
 </div>
 </body>

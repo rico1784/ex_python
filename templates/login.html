@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
-
+<!--Affichage de header-->
 {%include "model/head.html"%}
+
 
 <body>
 <div class="w-50 mt-3 m-auto">
+<!--    Formulaire de connexion-->
     <form action="/login" method="POST">
         <h1 class="h3 mb-3 fw-normal">Connexion</h1>
-
         <div class="mb-3 form-floating">
             <input type="email" class="form-control" name="postEmail" id="postEmail" placeholder="name@example.com">
             <label for="postEmail">Email address</label>
@@ -16,19 +17,35 @@
             <input type="password" class="form-control" name="postPassword" id="postPassword" placeholder="Password">
             <label for="postPassword">Password</label>
         </div>
+
+<!--    Message dynamique-->
         <div>
+
             {% if message %}
             <p>
                 {{ message }}
             </p>
             {% endif %}
         </div>
-        <button class="mb-3 w-50 btn btn-lg btn-primary" type="submit">Sign in</button>
+<!--    fin-->
+
+        <button class="mb-3 w-50 btn btn-lg btn-primary" type="submit">Se connecter</button>
     </form>
+<!--    fin du formulaire-->
+
+
+<!--    Bouton vers espace client affiché si l'utilisateur est connecté-->
+    {% if isConnected %}
+    <button type="button" class="mb-3 w-50 btn btn-lg btn-secondary"><a href="/" class="nav-link ">Mon espace</a></button>
+    {% endif %}
+<!--    Fin-->
 </div>
 
 </body>
+<!--Scripts-->
 {% include "model/script.html"%}
+<!--Affichage du footer-->
 {% include "model/footer.html"%}
+
 
 </html>

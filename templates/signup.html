@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
-
+<!--Affichage de header-->
 {%include "model/head.html"%}
 
 <body>
 <div class="w-50 mt-3 m-auto">
+<!--    Début du formulaire-->
     <form action="/signup" method="post">
         <h1 class="h3 mb-3 fw-normal">Créer votre compte</h1>
         <div class="form-floating">
@@ -21,18 +22,27 @@
         </div>
 
         <div>
-            {% if message %}
             <p>
+                {% if message %}
                 {{ message }}
+                {% endif %}
             </p>
+            {% if loginOK %}
+            <button type="button" class="w-50  btn btn-lg btn-success"><a href="/login" class="nav-link ">Se connecter ici</a></button>
             {% endif %}
         </div>
+        {% if not loginOK %}
         <button class="w-50  btn btn-lg btn-primary" type="submit">Sign in</button>
+        {% endif %}
     </form>
+<!--    Fin du formulaire-->
 </div>
 
 </body>
+<!--scripts-->
 {% include "model/script.html"%}
+
+<!--Affichage du footer-->
 {% include "model/footer.html"%}
 
 </html>

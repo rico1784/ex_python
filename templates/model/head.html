@@ -25,9 +25,14 @@
             </form>
 
             <div class="text-end">
+                {% if not isConnected %}
                 <button type="button" class="btn btn-outline-light me-2"><a href="/login" class="nav-link ">Login</a></button>
                 <button type="button" class="btn btn-warning"><a href="/signup" class="nav-link ">Sign-up</a></button>
-                <button type="button" class="btn btn-danger"><a href="/signup" class="nav-link ">Logout</a></button>
+                {% endif %}
+                {% if isConnected %}
+                <button type="button" class="btn btn-danger"><a href="/logout" class="nav-link ">Logout</a></button>
+                {% endif %}
             </div>
         </div>
 </header>
+
